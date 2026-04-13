@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 
 def calculate_ward_occupancy(admission, discharge):
     ward_occupancy = []
-    current_occupancy = 0
+    current_occupancy 
     for i in range(len(admission)):
         current_occupancy += admission[i] - discharge[i]
         ward_occupancy.append(current_occupancy)
