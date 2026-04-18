@@ -29,7 +29,7 @@ def Hospital_Management(daily_patients, max_ward_capacity=30):
     print(f"Total days: {total_days} Days")
     print(f"The breach days{num_breach_days} Days")
     print(f"The breach proportion: {breach_proportion:.2%}")
-    print(f"The average of extra wards: {extra_wards_avg:.2f} 个")
+    print(f"The average of extra wards: {extra_wards_avg:.2f}")
 
     return {
         "total_days": total_days,
