@@ -1,0 +1,44 @@
+def Hospital_Management(daily_patients, max_ward_capacity=30):
+    total_days = len(daily_patients)
+    if total_days == 0:
+        print("No data available to generate report.")
+        return
+
+    breach_days = []          # The days when the number of patients exceeded the ward capacity
+    exceeded_patients = []    # The number of patients that exceeded the capacity on those breach days
+
+    for count in daily_patients:
+        if count > max_ward_capacity:
+            breach_days.append(count)
+            exceeded = count - max_ward_capacity
+            exceeded_patients.append(exceeded)
+
+    # The number of days when the ward capacity was breached
+    num_breach_days = len(breach_days)
+    # The proportion of breach days to total days
+    breach_proportion = num_breach_days / total_days
+
+    # The average number of extra wards needed during breach days
+    extra_wards_avg = 0.0
+    if num_breach_days > 0:
+        # The total number of patients that exceeded the capacity across all breach days
+        total_exceeded = sum(exceeded_patients)
+        extra_wards_avg = total_exceeded / max_ward_capacity / num_breach_days
+
+    print(f"The max ward capacity: {max_ward_capacity} patients")
+    print(f"Total days: {total_days} Days")
+    print(f"The breach days{num_breach_days} Days")
+    print(f"The breach proportion: {breach_proportion:.2%}")
+    print(f"The average of extra wards: {extra_wards_avg:.2f} 个")
+
+    return {
+        "total_days": total_days,
+        "breach_days_count": num_breach_days,
+        "breach_proportion": breach_proportion,
+        "average_extra_wards_needed": extra_wards_avg
+    }
+
+
+if __name__ == '__main__':
+    test_daily_data = [25, 30, 35, 28, 40, 32, 29]
+    Hospital_Management(test_daily_data)
