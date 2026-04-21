@@ -8,12 +8,9 @@ def calculate_ward_occupancy(admission, discharge):
         occupancy.append(current)
     return occupancy
 
-def hospital_management(daily_patients, max_ward_capacity=10):
-    total_days = len(daily_patients)
-    if total_days == 0:
-        print("No data available to generate report.")
-        return
+def hospital_management(daily_patients, max_ward_capacity=30):
 
+    total_days = len(daily_patients)
     days = list(range(1, total_days + 1))
     breach_days = []          # The days when the number of patients exceeded the ward capacity
     exceeded_patients = []    # The number of patients that exceeded the capacity on those breach days
@@ -82,7 +79,7 @@ def hospital_management(daily_patients, max_ward_capacity=10):
     }
 
 
-admissions = [3, 5, 7, 6, 4, 3, 2]
-discharges = [1, 2, 3, 4, 5, 3, 2]
+admissions = [32, 31, 29,33, 28, 30, 32]
+discharges = [0, 28, 30, 31, 27, 32, 29]
 occupancy = calculate_ward_occupancy(admissions, discharges)
 hospital_management(occupancy)
