@@ -46,16 +46,16 @@ def find_infection_peak(admission, discharge):
     
     # Add value labels on bars
     for bar, val in zip(bars, daily_increases):
-        y_offset = 0.5 if val >= 0 else -0.8
+        y_offset = 0.02 if val >= 0 else -0.02
         va = 'bottom' if val >= 0 else 'top'
         plt.text(bar.get_x() + bar.get_width()/2., bar.get_height() + y_offset,
                  f'{val:+d}', ha='center', va=va, fontsize=12, fontweight='bold')
     # Add zero line
     plt.axhline(y=0, color='black', linestyle='-', linewidth=1)
     # Annotate peak
-    plt.annotate(f'Peak: +{max_increase} patients\nDay {peak_day}',
+    plt.annotate(f'Peak: +{max_increase} patients\nreached on Day {peak_day}',
                  xy=(peak_day, max_increase),
-                 xytext=(peak_day + 0.5, max_increase + 1.5),
+                 xytext=(peak_day + 0.5, max_increase - 0.5),
                  arrowprops=dict(arrowstyle='->', color='red', lw=1.5),
                  fontsize=11, color='red', fontweight='bold',
                  bbox=dict(boxstyle='round', facecolor='yellow', alpha=0.3))
