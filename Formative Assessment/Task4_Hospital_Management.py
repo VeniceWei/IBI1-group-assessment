@@ -31,7 +31,7 @@ def hospital_management(daily_patients, max_ward_capacity=30):
     if num_breach_days > 0:
         # The total number of patients that exceeded the capacity across all breach days
         total_exceeded = sum(exceeded_patients)
-        extra_wards_avg = total_exceeded / max_ward_capacity / num_breach_days
+        extra_wards_avg = total_exceeded // num_breach_days
 
     # Visualization
     plt.figure(figsize=(10, 6))
