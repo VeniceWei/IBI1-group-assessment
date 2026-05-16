@@ -1,12 +1,6 @@
 import matplotlib.pyplot as plt
-def calculate_ward_occupancy(admission, discharge):
-    """Task 1: Calculate daily ward occupancy"""
-    occupancy = []
-    current = 0
-    for i in range(len(admission)):
-        current += admission[i] - discharge[i]
-        occupancy.append(current)
-    return occupancy
+import Task1_ward_occupancy
+
 
 def find_infection_peak(admission, discharge):
     """
@@ -15,7 +9,7 @@ def find_infection_peak(admission, discharge):
     Output: max increase day, peak status
     """
     # Step 1: Get daily occupancy from Task 1 function
-    occupancy = calculate_ward_occupancy(admission, discharge)
+    occupancy = Task1_ward_occupancy.reuse_calculate_ward_occupancy(admission, discharge)
     
     # Step 2: Calculate daily increase in patients (change from previous day)
     daily_increases = []
@@ -83,6 +77,6 @@ def find_infection_peak(admission, discharge):
     return max_increase, peak_day, peak_status
 
 # testing
-admissions = [3, 5, 7, 6, 4, 3, 2]
-discharges = [1, 2, 3, 4, 5, 3, 2]
-find_infection_peak(admissions, discharges)
+admission = [11, 17, 28, 20, 21, 15, 14]
+discharge = [2, 5, 12, 13, 30, 21, 15]
+find_infection_peak(admission, discharge)

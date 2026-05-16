@@ -1,20 +1,10 @@
 import matplotlib.pyplot as plt
 import numpy as np
+import Task1_ward_occupancy
 
-def calculate_daily_occupancy(admissions, discharges):
-    """
-    Task1
-    """
-    occupancy = []
-    current = 0
-    for i in range(len(admissions)):
-        current += admissions[i] - discharges[i]
-        occupancy.append(current)
-    return occupancy
-
-def vaccination_effectiveness(admissions, discharges,
-                              admissions_after, discharges_after,
-                              threshold_percent=5):
+def vaccination_effectiveness(admission, discharge,
+                              admission_after, discharge_after,
+                              threshold_percent=30):
     """
     Evaluate whether the vaccine is effective.
 
@@ -32,8 +22,8 @@ def vaccination_effectiveness(admissions, discharges,
         Result string and displays comparison graphs
     """
     # Calculate daily occupancy
-    before_occ = calculate_daily_occupancy(admissions, discharges)
-    after_occ = calculate_daily_occupancy(admissions_after, discharges_after)
+    before_occ = Task1_ward_occupancy.reuse_calculate_ward_occupancy(admission, discharge)
+    after_occ = Task1_ward_occupancy.calculate_ward_occupancy(admission_after, discharge_after)
 
     # Average daily occupancy
     avg_before = np.mean(before_occ)
@@ -46,43 +36,31 @@ def vaccination_effectiveness(admissions, discharges,
         change_percent = (avg_after - avg_before) / avg_before * 100
 
     # Define criteria
-    if change_percent <= -threshold_percent:
+    if change_percent < -threshold_percent:
         result = f"Vaccine effective: Average occupancy decreased from {avg_before:.1f} to {avg_after:.1f} (change {change_percent:.1f}%)"
-    elif change_percent >= threshold_percent:
+    elif change_percent >= -threshold_percent:
         result = f"Vaccine not effective: Average occupancy increased from {avg_before:.1f} to {avg_after:.1f} (change {change_percent:.1f}%)"
-    else:
-        result = f"Inconclusive: Minimal change from {avg_before:.1f} to {avg_after:.1f} (change {change_percent:.1f}%)"
 
     # Visualization
     days = list(range(1, 8))
-    plt.figure(figsize=(12, 5))
 
-    # Subplot 1: Line chart of daily occupancy
-    plt.subplot(1, 2, 1)
-    plt.plot(days, before_occ, marker='o', label='Before Vaccine', linewidth=2, markersize=6)
-    plt.plot(days, after_occ, marker='s', label='After Vaccine', linewidth=2, markersize=6)
-    plt.axhline(y=avg_before, color='blue', linestyle='--', alpha=0.5, label=f'Before mean = {avg_before:.1f}')
-    plt.axhline(y=avg_after, color='orange', linestyle='--', alpha=0.5, label=f'After mean = {avg_after:.1f}')
+    # Line chart of daily occupancy
+    plt.plot(days, before_occ, marker='o', label='Before Vaccine', 
+         linewidth=2, markersize=6, color='#2E86AB')
+    plt.plot(days, after_occ, marker='s', label='After Vaccine', 
+         linewidth=2, markersize=6, color='#E63946')
+    plt.axhline(y=avg_before, color='#2E86AB', linestyle='--', alpha=0.5, label=f'Before mean = {avg_before:.1f}')
+    plt.axhline(y=avg_after, color='#E63946', linestyle='--', alpha=0.5, label=f'After mean = {avg_after:.1f}')
     plt.xlabel('Day')
     plt.ylabel('Number of Patients')
     plt.title('Daily Ward Occupancy Comparison')
     plt.legend()
     plt.grid(True, alpha=0.3)
 
-    # Subplot 2: Bar chart of average occupancy
-    plt.subplot(1, 2, 2)
-    bars = plt.bar(['Before Vaccine', 'After Vaccine'], [avg_before, avg_after], color=['#1f77b4', '#ff7f0e'])
-    plt.ylabel('Average Number of Patients')
-    plt.title('Average Occupancy Comparison')
-    # Display values on top of bars
-    for bar in bars:
-        height = bar.get_height()
-        plt.text(bar.get_x() + bar.get_width()/2., height + 0.1,
-                 f'{height:.1f}', ha='center', va='bottom')
-
     # Annotate percentage change on the graph
     plt.text(0.5, 0.9, f'Change: {change_percent:.1f}%',
              transform=plt.gca().transAxes, ha='center',
+             horizontalalignment='left',
              bbox=dict(boxstyle='round', facecolor='wheat', alpha=0.5))
 
     plt.tight_layout()
@@ -91,12 +69,12 @@ def vaccination_effectiveness(admissions, discharges,
     return result
 
 # Example data
-admissions = [3, 5, 7, 6, 4, 3, 2]
-discharges = [1, 2, 3, 4, 5, 3, 2]
+admission = [11, 17, 28, 20, 21, 15, 14]
+discharge = [2, 5, 12, 13, 30, 21, 15]
 
-admissions_after = [2, 3, 4, 5, 3, 2, 1]
-discharges_after = [1, 2, 3, 4, 4, 2, 1]
+admission_after = [11, 17, 28, 20, 21, 15, 14]
+dischargem_after = [4, 13, 14, 18, 22, 25, 14]
 
 # Execute
-print(vaccination_effectiveness(admissions, discharges,
-                                admissions_after, discharges_after))
+print(vaccination_effectiveness(admission, discharge,
+                                admission_after, discharge_after))

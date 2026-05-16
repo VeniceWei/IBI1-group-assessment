@@ -1,12 +1,6 @@
 import matplotlib.pyplot as plt
-def calculate_ward_occupancy(admission, discharge):
-    """Task 1: Calculate daily ward occupancy"""
-    occupancy = []
-    current = 0
-    for i in range(len(admission)):
-        current += admission[i] - discharge[i]
-        occupancy.append(current)
-    return occupancy
+import math
+import Task1_ward_occupancy
 
 def hospital_management(daily_patients, max_ward_capacity=30):
 
@@ -31,7 +25,7 @@ def hospital_management(daily_patients, max_ward_capacity=30):
     if num_breach_days > 0:
         # The total number of patients that exceeded the capacity across all breach days
         total_exceeded = sum(exceeded_patients)
-        extra_wards_avg = total_exceeded // num_breach_days
+        extra_wards_avg = math.ceil(total_exceeded / num_breach_days)
 
     # Visualization
     plt.figure(figsize=(10, 6))
@@ -79,7 +73,7 @@ def hospital_management(daily_patients, max_ward_capacity=30):
     }
 
 
-admissions = [32, 31, 29,33, 28, 30, 32]
-discharges = [0, 28, 30, 31, 27, 32, 29]
-occupancy = calculate_ward_occupancy(admissions, discharges)
+admission = [11, 17, 28, 20, 21, 15, 14]
+discharge = [2, 5, 12, 13, 30, 21, 15]
+occupancy = Task1_ward_occupancy.reuse_calculate_ward_occupancy(admission, discharge)
 hospital_management(occupancy)

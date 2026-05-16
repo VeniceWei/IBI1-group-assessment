@@ -1,24 +1,18 @@
 import matplotlib.pyplot as plt
 import numpy as np
+import Task1_ward_occupancy
 
-def calculate_daily_occupancy(admissions, discharges, initial_bed=0):
-    occupancy = []
-    current = initial_bed
-    for a, d in zip(admissions, discharges):
-        current += a - d
-        occupancy.append(current)
-    return occupancy
 
-def calculate_alos(admissions, discharges, initial_bed=0):
-    daily_occupancy = calculate_daily_occupancy(admissions, discharges, initial_bed)
+def calculate_alos(admission, discharge, initial_bed=0):
+    daily_occupancy = Task1_ward_occupancy.reuse_calculate_ward_occupancy(admission, discharge, initial_bed)
     person_days = sum(daily_occupancy)
-    total_discharged = sum(discharges)
+    total_discharged = sum(discharge)
     
     if total_discharged == 0:
         raise ValueError("No discharged patients in the period, cannot calculate ALOS")
     alos = person_days / total_discharged
     
-    days = list(range(1, len(admissions)+1))
+    days = list(range(1, len(admission)+1))
     
     # Print results
     print(f"Total Person-Days: {person_days}")
@@ -28,8 +22,8 @@ def calculate_alos(admissions, discharges, initial_bed=0):
     return alos
 
 
-admissions = [3, 5, 7, 6, 4, 3, 2]
-discharges = [1, 2, 3, 4, 5, 3, 2]
+admission = [11, 17, 28, 20, 21, 15, 14]
+discharge = [2, 5, 12, 13, 30, 21, 15]
 
 
-calculate_alos(admissions, discharges)
+calculate_alos(admission, discharge)
