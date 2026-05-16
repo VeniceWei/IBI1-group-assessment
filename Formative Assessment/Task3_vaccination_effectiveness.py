@@ -73,7 +73,7 @@ admission = [11, 17, 28, 20, 21, 15, 14]
 discharge = [2, 5, 12, 13, 30, 21, 15]
 
 admission_after = [11, 17, 28, 20, 21, 15, 14]
-discharge_afterb = [4, 13, 14, 18, 22, 25, 14]
+discharge_after = [4, 13, 14, 18, 22, 25, 14]
 
 # Execute
 print(vaccination_effectiveness(admission, discharge,
