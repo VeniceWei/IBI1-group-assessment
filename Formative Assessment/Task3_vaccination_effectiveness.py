@@ -23,7 +23,7 @@ def vaccination_effectiveness(admission, discharge,
     """
     # Calculate daily occupancy
     before_occ = Task1_ward_occupancy.reuse_calculate_ward_occupancy(admission, discharge)
-    after_occ = Task1_ward_occupancy.calculate_ward_occupancy(admission_after, discharge_after)
+    after_occ = Task1_ward_occupancy.reuse_calculate_ward_occupancy(admission_after, discharge_after)
 
     # Average daily occupancy
     avg_before = np.mean(before_occ)
@@ -58,9 +58,8 @@ def vaccination_effectiveness(admission, discharge,
     plt.grid(True, alpha=0.3)
 
     # Annotate percentage change on the graph
-    plt.text(0.5, 0.9, f'Change: {change_percent:.1f}%',
+    plt.text(0.12, 0.93, f'Change: {change_percent:.1f}%',
              transform=plt.gca().transAxes, ha='center',
-             horizontalalignment='left',
              bbox=dict(boxstyle='round', facecolor='wheat', alpha=0.5))
 
     plt.tight_layout()

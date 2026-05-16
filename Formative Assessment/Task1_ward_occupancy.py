@@ -47,8 +47,10 @@ def reuse_calculate_ward_occupancy(admission, discharge):
     for i in range(len(admission)):
         current_occupancy += admission[i] - discharge[i]
         ward_occupancy.append(current_occupancy)
+    return ward_occupancy
 
 # testing
-admission = [11, 17, 28, 20, 21, 15, 14]
-discharge = [2, 5, 12, 13, 30, 21, 15]
-calculate_ward_occupancy(admission, discharge)
+if __name__ == "__main__":
+    admission = [11, 17, 28, 20, 21, 15, 14]
+    discharge = [2, 5, 12, 13, 30, 21, 15]
+    calculate_ward_occupancy(admission, discharge)

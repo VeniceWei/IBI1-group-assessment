@@ -4,7 +4,7 @@ import Task1_ward_occupancy
 
 
 def calculate_alos(admission, discharge, initial_bed=0):
-    daily_occupancy = Task1_ward_occupancy.reuse_calculate_ward_occupancy(admission, discharge, initial_bed)
+    daily_occupancy = Task1_ward_occupancy.reuse_calculate_ward_occupancy(admission, discharge)
     person_days = sum(daily_occupancy)
     total_discharged = sum(discharge)
     
