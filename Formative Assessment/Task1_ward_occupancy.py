@@ -14,7 +14,7 @@ def calculate_ward_occupancy(admission, discharge):
     plt.figure(figsize=(12, 6))
     
     # Bar chart for daily occupancy
-    bars = plt.bar(days, ward_occupancy, alpha=0.5, color='#2E86AB', 
+    bars = plt.bar(days, ward_occupancy, alpha=0.8, color='#2E86AB', 
                    edgecolor='black', linewidth=1.5, label='Daily Occupancy')
     
     # Line plot on top of bars
