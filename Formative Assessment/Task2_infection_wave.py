@@ -49,8 +49,8 @@ def find_infection_peak(admission, discharge):
     # Annotate peak
     plt.annotate(f'Peak: +{max_increase} patients\nreached on Day {peak_day}',
                  xy=(peak_day, max_increase),
-                 xytext=(peak_day + 0.5, max_increase - 0.5),
-                 arrowprops=dict(arrowstyle='->', color='red', lw=1.5),
+                 xytext=(peak_day + 0.5, max_increase - 2),
+                 arrowprops=dict(arrowstyle='->', color='gold', lw=1.5),
                  fontsize=11, color='red', fontweight='bold',
                  bbox=dict(boxstyle='round', facecolor='yellow', alpha=0.3))
     # Customize chart
